@@ -10,6 +10,7 @@
             font-family: 'Arial', sans-serif;
             overflow-x: hidden;
         }
+
         .page {
             width: 100vw;
             height: 100vh;
@@ -18,20 +19,13 @@
             align-items: center;
             flex-direction: column;
             position: relative;
+            padding: 20px;
         }
-        .active {
-            display: flex;
-        }
+        .active { display: flex; }
 
         /* PAGE 1 */
-        .page1 {
-            background-color: red;
-        }
-        .page1 img {
-            max-width: 80%;
-            max-height: 80%;
-            border-radius: 20px;
-        }
+        .page1 { background-color: #e74c3c; }
+        .page1 img { max-width: 80%; max-height: 80%; border-radius: 20px; }
         .center-button {
             position: absolute;
             top: -100px;
@@ -46,8 +40,17 @@
             box-shadow: 0px 0px 15px rgba(0,0,0,0.3);
             animation: slideDown 1.5s forwards;
         }
-        @keyframes slideDown {
-            to { top: 50%; }
+        @keyframes slideDown { to { top: 50%; } }
+
+        /* CARD STYLE FOR QUESTIONS & FINAL PAGE */
+        .card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
         }
 
         /* PAGE 2 */
@@ -56,100 +59,76 @@
             background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"><text x="0" y="20" font-size="20">❤️💋</text></svg>');
             background-repeat: repeat;
         }
-        .question {
-            text-align: center;
-            font-size: 32px;
-            margin-bottom: 20px;
-            color: darkred;
-            text-shadow: 1px 1px 2px white;
-        }
-        .options button {
+        .page2 .question { font-size: 28px; color: darkred; text-shadow: 1px 1px 2px white; }
+        .page2 .options button {
             display: block;
             margin: 10px auto;
-            padding: 15px 30px;
-            font-size: 22px;
+            padding: 12px 25px;
+            font-size: 20px;
             border: none;
             border-radius: 25px;
             cursor: pointer;
             background-color: pink;
             color: white;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             transition: transform 0.2s, background-color 0.2s;
         }
-        .options button:hover {
-            transform: scale(1.1);
-            background-color: hotpink;
-        }
-        .message {
-            color: red;
-            font-size: 24px;
-            margin-top: 15px;
-        }
+        .page2 .options button:hover { transform: scale(1.1); background-color: hotpink; }
+        .page2 .message { color: red; font-size: 22px; margin-top: 10px; }
 
         /* PAGE 3 */
         .page3 {
-            background-color: darkred;
-            color: white;
-            text-align: center;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"><text x="0" y="20" font-size="20">❤️💋</text></svg>');
+            background-color: #ffb6c1;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"><text x="0" y="20" font-size="20">💖💋</text></svg>');
             background-repeat: repeat;
         }
-        .page3 .question {
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
+        .page3 .question { font-size: 28px; color: darkred; }
         .page3 .options button {
             display: inline-block;
-            margin: 15px;
+            margin: 10px;
             padding: 15px 30px;
-            font-size: 24px;
+            font-size: 22px;
             border-radius: 25px;
             border: none;
             cursor: pointer;
             background-color: pink;
             color: white;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             transition: transform 0.2s, background-color 0.2s;
         }
-        .page3 .options button:hover {
-            transform: scale(1.1);
-            background-color: hotpink;
-        }
-        .final-message {
-            font-size: 28px;
-            margin-top: 20px;
-        }
-        .romantic-lines {
-            font-size: 24px;
-            margin-top: 15px;
-            line-height: 1.5;
-        }
+        .page3 .options button:hover { transform: scale(1.1); background-color: hotpink; }
+        .final-message { font-size: 26px; margin-top: 20px; color: darkred; }
+        .romantic-lines { font-size: 22px; margin-top: 15px; line-height: 1.5; color: darkred; }
     </style>
 </head>
 <body>
 
-<!-- PAGE 1: Image with sliding button -->
+<!-- PAGE 1 -->
 <div class="page page1 active" id="page1">
     <img src="us.jpg" alt="Us Together">
     <div class="center-button" id="startBtn">Kisses on the way 💋</div>
 </div>
 
-<!-- PAGE 2: Questions -->
+<!-- PAGE 2 -->
 <div class="page page2" id="page2">
-    <div class="question" id="questionText"></div>
-    <div class="options" id="optionsContainer"></div>
-    <div class="message" id="message"></div>
+    <div class="card">
+        <div class="question" id="questionText"></div>
+        <div class="options" id="optionsContainer"></div>
+        <div class="message" id="message"></div>
+    </div>
 </div>
 
-<!-- PAGE 3: Final valentine question -->
+<!-- PAGE 3 -->
 <div class="page page3" id="page3">
-    <div class="question">Will you be my Valentine, Mote?</div>
-    <div class="options">
-        <button onclick="checkValentine('yes')">Yes ❤️</button>
-        <button onclick="checkValentine('no')">No 😢</button>
+    <div class="card">
+        <div class="question">Will you be my Valentine, Mote?</div>
+        <div class="options">
+            <button onclick="checkValentine('yes')">Yes ❤️</button>
+            <button onclick="checkValentine('no')">No 😢</button>
+        </div>
+        <div class="final-message" id="finalMessage"></div>
+        <div class="romantic-lines" id="romanticLines"></div>
     </div>
-    <div class="final-message" id="finalMessage"></div>
-    <div class="romantic-lines" id="romanticLines"></div>
 </div>
 
 <script>
@@ -165,28 +144,12 @@
         showQuestion(0);
     });
 
-    // PAGE 2: Questions
+    // PAGE 2 Questions
     const questions = [
-        {
-            text: "When did we kiss for the first time?",
-            options: ["25 December", "26 December", "27 December"],
-            answer: "26 December"
-        },
-        {
-            text: "When did you say I love you to me?",
-            options: ["1 January", "2 January", "3 January"],
-            answer: "2 January"
-        },
-        {
-            text: "Whom do you love the most?",
-            options: ["PUBG", "Me"],
-            answer: "Me"
-        },
-        {
-            text: "Who is the smartest person in our relationship?",
-            options: ["Vansh", "Harshita"],
-            answer: "Harshita"
-        }
+        { text: "When did we kiss for the first time?", options: ["25 December", "26 December", "27 December"], answer: "26 December" },
+        { text: "When did you say I love you to me?", options: ["1 January", "2 January", "3 January"], answer: "2 January" },
+        { text: "Whom do you love the most?", options: ["PUBG", "Me"], answer: "Me" },
+        { text: "Who is the smartest person in our relationship?", options: ["Vansh", "Harshita"], answer: "Harshita" }
     ];
 
     let currentQuestion = 0;
@@ -209,28 +172,20 @@
     function checkAnswer(selected) {
         if (selected === questions[currentQuestion].answer) {
             currentQuestion++;
-            if (currentQuestion < questions.length) {
-                showQuestion(currentQuestion);
-            } else {
-                page2.classList.remove('active');
-                page3.classList.add('active');
-            }
+            if (currentQuestion < questions.length) showQuestion(currentQuestion);
+            else { page2.classList.remove('active'); page3.classList.add('active'); }
         } else {
             message.textContent = "Wrong answer, Mote kutte 😢";
         }
     }
 
-    // PAGE 3: Valentine question
+    // PAGE 3 Valentine
     function checkValentine(ans) {
         const finalMessage = document.getElementById('finalMessage');
         const romanticLines = document.getElementById('romanticLines');
         if (ans === 'yes') {
             finalMessage.textContent = "Yay! 💖 You made me so happy!";
-            romanticLines.innerHTML = `
-                You are my sunshine 🌞,<br>
-                My forever and always 💕,<br>
-                Happy Valentine's Day, my love ❤️
-            `;
+            romanticLines.innerHTML = `You are my sunshine 🌞,<br>My forever and always 💕,<br>Happy Valentine's Day, my love ❤️`;
         } else {
             finalMessage.textContent = "Nahi Mote! Wrong answer 😢";
             romanticLines.textContent = "";
